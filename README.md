@@ -26,7 +26,7 @@ even closer to one another, since latency tends to dominate in most distributed 
 
 ## Caveats
 
-* This is Flask & Python, other platforms might have different 
+* This is Flask & Python, other platforms might have different characteristics and mechanisms for both HTML & JSON serialization 
 * I am not an expert python or flask programmer, this is probably not a great example of python code to follow.
 * I intentionally kept things very simple
 * I did not do any performance tuning for any of the endpoints
