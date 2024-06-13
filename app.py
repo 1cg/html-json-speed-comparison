@@ -2,7 +2,7 @@ from flask import (
     Flask, request, render_template, g as app_ctx
 )
 import time
-from contacts_model import Contact
+from contacts import Contact
 
 # ========================================================
 # Flask App

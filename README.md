@@ -10,7 +10,7 @@ formats:
 In all three cases the page is rendering 1000 contacts.  The two HTML responses use 
 [Jinja2](https://jinja.palletsprojects.com/en/2.10.x/) templates.  The JSON end point uses the
 [dataclass](https://docs.python.org/3/library/dataclasses.html) library to make JSON serialization of the
-sole model, `contacts_model.py`, easy.
+sole model, `contacts.py`, easy.
 
 ## Data Setup
 
