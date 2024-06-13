@@ -1,0 +1,8 @@
+{% for contact in contacts %}
+    <tr>
+        <td>{{ contact.first }}</td>
+        <td>{{ contact.last }}</td>
+        <td>{{ contact.phone }}</td>
+        <td>{{ contact.email }}</td>
+    </tr>
+{% endfor %}

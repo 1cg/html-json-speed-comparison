@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <h2>HTML vs JSON Speed Comparison</h2>
+    <p>This small application demonstrates the speed differential between using HTML and JSON as a
+        response encoding to web application requests.  The response consists of 100 contacts loaded
+    from the <code>contacts.json</code> file.  The file is loaded into memory at application startup</p>
+
+    <h3>Direct Links</h3>
+    <p>Here are direct links to each response:</p>
+    <ul>
+        <li><a href="/full-html">Full HTML Page</a></li>
+        <li><a href="/partial-html">Partial HTML Table</a></li>
+        <li><a href="/json">JSON</a></li>
+    </ul>
+
+
+    <h3>Speed Test</h3>
+    <button onclick="runPerfComparison()">Begin Speed Test</button>
+    <button onclick="runOnePerfTest('full-html')">Test /full-html</button>
+    <button onclick="runOnePerfTest('partial-html')">Test /partial-html</button>
+    <button onclick="runOnePerfTest('json-html')">Test /json</button>
+    <script>
+
+        var iterations = 1000;
+
+        async function runOnePerfTest(endpoint) {
+            let output = document.getElementById("output");
+            output.innerText = "";
+            output.innerText += "Running perf for endpoint /"  + endpoint + "\n";
+            let fullHtmlTime = 0;
+            for (let i = 0; i < iterations; i++) {
+                let start_time = new Date().getTime();
+                await fetch(endpoint);
+                let end_time = new Date().getTime();
+                output.innerText += (end_time - start_time) + ",";
+                fullHtmlTime += (end_time - start_time);
+            }
+            output.innerText += ("\n\nAverage for /" + endpoint +  ":" + (fullHtmlTime / iterations)) + "ms\n";
+        }
+
+        async function runPerfComparison() {
+            let output = document.getElementById("output");
+            output.innerText = "";
+            let fullHtmlTime = 0;
+            output.innerText += "Starting full HTML requests...\n";
+            for (let i = 0; i < iterations; i++) {
+                let start_time = new Date().getTime();
+                await fetch("full-html");
+                let end_time = new Date().getTime();
+                output.innerText += (end_time - start_time) + ",";
+                fullHtmlTime += (end_time - start_time);
+            }
+
+            output.innerText += "\n\nStarting partial HTML requests...\n";
+            let partialHtmlTime = 0;
+            for (let i = 0; i < iterations; i++) {
+                let start_time = new Date().getTime();
+                await fetch("partial-html");
+                let end_time = new Date().getTime();
+                output.innerText += (end_time - start_time) + ",";
+                partialHtmlTime += (end_time - start_time);
+            }
+
+            output.innerText += "\n\nStarting JSON requests...\n";
+            let jsonTime = 0;
+            for (let i = 0; i < iterations; i++) {
+                let start_time = new Date().getTime();
+                await fetch("json");
+                let end_time = new Date().getTime();
+                output.innerText += (end_time - start_time) + ",";
+                jsonTime += (end_time - start_time);
+            }
+
+            output.innerText += ("\n\nAverage Full HTML Time : " + (fullHtmlTime / iterations)) + "ms\n";
+            output.innerText += ("Average Partial HTML Time : " + (partialHtmlTime / iterations) + "ms\n");
+            output.innerText += ("Average JSON Time : " + (jsonTime / iterations) + "ms\n");
+        }
+    </script>
+    <h3>Output</h3>
+    <pre id="output">
+
+    </pre>
+{% endblock %}
