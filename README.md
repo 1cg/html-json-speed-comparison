@@ -53,7 +53,7 @@ note that a JSON API often returns all data, regardless of necessity, whereas an
 for a given UI because, well, it _is_ the UI.
 
 This is speculation, however, and my take-away from all this is not that HTML is faster than JSON: I'm sure with a 
-well tuned JSON serialization mechanism it can be made faster than the HTML.  Rather it is that the two approaches are very close 
+well tuned JSON serialization mechanism the JSON responses can be made faster than the HTML responses.  Rather it is that the two approaches are very close 
 to one another and are probably round off errors in the overall scheme of total system performance.  Once you hit a data store, or add 
 in real-world latency between the client and server, these differences vanish in the wash.
 
